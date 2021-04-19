@@ -132,14 +132,15 @@ class Course(Student):
         return self.Studentlist
 
     
-    def addStudent(self, studentName):
+    def addStudent(self):
         
-        if studentName in self.Enroll:
-            print("You Already Enroled in the class")
-        else:
-            self.Enroll.append(studentName)
-            print("Student: "+str(studentName)+" added to class", end=" ")
-            print( self.courceTitle)
+        for i in self.Studentlist:
+            if i in self.Enroll:
+                print("You Already Enroled in the class")
+            else:
+                self.Enroll.append(i)
+                print("Student: "+str(i)+" added to class", end=" ")
+                print( self.courceTitle)
 
     def display_Enroll(self):
         self.Enroll.sort()
