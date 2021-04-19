@@ -8,8 +8,8 @@ class Student:
         self.hw_score=[]
         self.exam_score=[]
         self.avg=()
-        self.studentList=[]
-        self.score=[]
+        
+        self.score=[] 
 
     
     @property
@@ -20,24 +20,36 @@ class Student:
     
     
 
-    def addHWScore(self, score):
+    def addHWScore(self):
         #c=input("enter a Student name: ")
         #if c in self.studentName:
-            self.hw_score.append(score)
-            return self.hw_score
+        print("Please Enter -1 For exit")
+        while True:
+            self.score=int(input("Enter a Homework Score: "))
+            if self.score == -1:
+                break
+            else:
+                self.hw_score.append(self.score)
+
+        return self.hw_score
 
         
 
-    def addExamScore(self, score):
+    def addExamScore(self):
         #c=input("enter a Student name: ")
         #if c in self.studentName:
-            self.exam_score.append(score)
-            
-            return self.exam_score
+        print("Please enter -1 for exit")
+        while True:
+            self.score=int(input("Enter a Exam Score: "))
+            if self.score == -1:
+                break
+            else:
+                self.exam_score.append(self.score)
 
-    def addstudent(self, studentnName):
-        self.studentList.append(studentnName)
-        return self.studentList
+            
+        return self.exam_score
+
+    
 
     
 
@@ -48,6 +60,8 @@ class Student:
         totalhavg=0
         totale=0
         totaleavg=0
+        self.addHWScore()
+        self.addExamScore()
         if len(self.hw_score)>5:
             self.hw_score.remove(min(self.hw_score))
             
@@ -67,28 +81,25 @@ class Student:
 
         return self.avg
 
+   
+
 
     
         
 
 
 
-            
-
-        
-
-
-
 
 class Course(Student):
-    def __init__(self, courceTitle, courceNo, studentname=Student.studentName):
-        self.__studentName=studentname
+    def __init__(self, courceTitle, courceNo):
+        
         self.hw_score=[]
         self.exam_score=[]
         self.avg=[]
         self.__courceTitle=courceTitle
         self.__courceNo=courceNo
         self.Enroll=[]
+        self.Studentlist=[]
         
         
        
@@ -104,6 +115,11 @@ class Course(Student):
         return self.__studentName
 
     
+    def addstudent(self, studentName):
+        
+        self.Studentlist.append(studentName)
+        
+        return self.Studentlist
 
     
     def addStudent(self, studentName):
@@ -123,18 +139,14 @@ class Course(Student):
             print(i)
 
     
-    def studentgetAvarage(self, studentName):
+    def studentgetAvarage(self):
         stu={}
-        for stu.keys in studentName:
-            return 
-
-            stu[]=round(self.avg, 2)
-            print(stu)
+        for i in self.Studentlist:
+            stu[i]=round(self.calculate(), 2)
+        print(stu)
          
         
         
-
-
 
 
 class RecordOffice(Student):
@@ -155,49 +167,34 @@ class RecordOffice(Student):
 
 
 
-
-
-
-
 def main():
     s1=Student("Jenish")
-    s1.addstudent("Kunj")
-    s1.addstudent("Jenish")
-    s=Course("Math",101)
     
-    s.addHWScore(76)
-    s.addHWScore(34)
-    s.addHWScore(87)
-    s.addHWScore(65)
-    s.addHWScore(58)
-    s.addHWScore(43)
-
-    s.addExamScore(54)
-    s.addExamScore(45)
-    s.addExamScore(65)
-    s.addExamScore(76)
-    s.addExamScore(23)
-    s.calculate()
-    s.studentgetAvarage(s1.studentList)
-    print("")
-    s.addHWScore(86)
-    s.addHWScore(64)
-    s.addHWScore(87)
-    s.addHWScore(65)
-    s.addHWScore(78)
-    s.addHWScore(93)
-
-    s.addExamScore(74)
-    s.addExamScore(95)
-    s.addExamScore(75)
-    s.addExamScore(76)
-    s.addExamScore(83)
-    s.calculate()
-
-    s.studentgetAvarage(s1.studentList)
-    s.addStudent(s1.addstudent("Loy"))
-
-    s=RecordOffice(s1.studentName)
+    
+    s=Course("Math",101)
+    #
+   #
+    #s.studentgetAvarage(s1.studentList)
+    #print("")
+    #s.addHWScore(86)
+    #s.addHWScore(64)
+    #s.addHWScore(87)
+    #s.addHWScore(65)
+    #s.addHWScore(78)
+    #s.addHWScore(93)
+#
+    #s.addExamScore(74)
+    #s.addExamScore(95)
+    #s.addExamScore(75)
+    #s.addExamScore(76)
+    #s.addExamScore(83)
+    #s.calculate()
+#
+    s.addstudent("Jenish")
+    s.studentgetAvarage()
+    #
+#
+    #s=RecordOffice(s1.studentName)
     
     
     
