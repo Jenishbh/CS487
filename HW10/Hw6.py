@@ -119,11 +119,15 @@ class Course(Student):
     def addstudent(self):
         print("Please Enter 'exit' for Exit")
         while True:
-            studentName=input("Enter A Student Name: ")
+            studentName=str(input("Enter A Student Name: "))
             if studentName == 'exit':
                 break
+            
             else:
                 self.Studentlist.append(studentName)
+                
+
+                
         
         return self.Studentlist
 
@@ -149,7 +153,7 @@ class Course(Student):
         
         for i in self.Studentlist:
             print("Enter a Score For",i)
-            self.stu[i]=(self.calculate())
+            self.stu[i]=(round(self.calculate(), 2))
         print(self.stu)
         return self.stu
          
@@ -205,8 +209,8 @@ def main():
     s.studentgetAvarage()
     #
 #
-    s2=RecordOffice()
-    s2.grade()
+    s=RecordOffice()
+    s.grade()
     
     
     
