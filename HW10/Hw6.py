@@ -79,6 +79,8 @@ class Student:
         self.hw_score.clear()
         self.exam_score.clear()
 
+        
+
         return self.avg
 
    
@@ -92,14 +94,13 @@ class Student:
 
 class Course(Student):
     def __init__(self, courceTitle, courceNo):
-        
-        self.hw_score=[]
-        self.exam_score=[]
-        self.avg=[]
+        Student.hw_score=[]
+        Student.exam_score=[]
         self.__courceTitle=courceTitle
         self.__courceNo=courceNo
         self.Enroll=[]
         self.Studentlist=[]
+        self.stu={}
         
         
        
@@ -140,21 +141,24 @@ class Course(Student):
 
     
     def studentgetAvarage(self):
-        stu={}
+        
         for i in self.Studentlist:
-            stu[i]=round(self.calculate(), 2)
-        print(stu)
+            self.stu[i]=(self.calculate())
+        print(self.stu)
+        return self.stu
          
         
         
 
 
-class RecordOffice(Student):
+class RecordOffice(Course):
+    def __init__(self):
+        self.stu=Course.stu
 
     
-    Student.avg=[]
+    
     def grade(self):
-        for i in self.avg:
+        for i in self.stu.values():
             if  i >= 90: return "A"
             if  90 > i >= 80: return "B"
             if  80 > i >= 70: return "C"
@@ -194,7 +198,8 @@ def main():
     s.studentgetAvarage()
     #
 #
-    #s=RecordOffice(s1.studentName)
+    s2=RecordOffice()
+    s2.grade()
     
     
     
