@@ -40,7 +40,7 @@ class Student:
         #if c in self.studentName:
         print("Please enter -1 for exit")
         while True:
-            self.score=int(input("Enter a Exam Score: "))
+            self.score=int(input("Enter a Exam Score : "))
             if self.score == -1:
                 break
             else:
@@ -116,9 +116,14 @@ class Course(Student):
         return self.__studentName
 
     
-    def addstudent(self, studentName):
-        
-        self.Studentlist.append(studentName)
+    def addstudent(self):
+        print("Please Enter 'exit' for Exit")
+        while True:
+            studentName=input("Enter A Student Name: ")
+            if studentName == 'exit':
+                break
+            else:
+                self.Studentlist.append(studentName)
         
         return self.Studentlist
 
@@ -143,6 +148,7 @@ class Course(Student):
     def studentgetAvarage(self):
         
         for i in self.Studentlist:
+            print("Enter a Score For",i)
             self.stu[i]=(self.calculate())
         print(self.stu)
         return self.stu
@@ -194,7 +200,8 @@ def main():
     #s.addExamScore(83)
     #s.calculate()
 #
-    s.addstudent("Jenish")
+    s.addstudent()
+    
     s.studentgetAvarage()
     #
 #
