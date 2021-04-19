@@ -67,11 +67,11 @@ class Student:
             
         totalh=sum(self.hw_score)
         totalhavg=totalh/len(self.hw_score)
-        print("The Homework Avrage is "+str(totalhavg))
+        print("The Homework Avrage is "+round((totalhavg), 2))
     
         totale=sum(self.exam_score)
         totaleavg=totale/len(self.exam_score)
-        print("The Exam Avrage is "+str(totaleavg))
+        print("The Exam Avrage is "+round((totaleavg), 2))
 
         self.avg=(0.4*totalhavg)+(0.6*totaleavg)
         print("The final Avarage is ",round((self.avg),2))
