@@ -3,24 +3,21 @@ import enum
 
 
 class Student:
-    def __init__(self, studentName):
-        self.__studentName=studentName
+    def __init__(self):
+        
         Student.hw_score=[]
         Student.exam_score=[]
         Student.avg=()
         Student.Studentlist=[]
-        
         self.score=[] 
 
     
-    @property
-    def studentName(self):
-        return self.__studentName
     
     
     
     
-
+    
+    
     def addHWScore(self):
         #c=input("enter a Student name: ")
         #if c in self.studentName:
@@ -60,13 +57,13 @@ class Student:
             
             else:
                 Student.Studentlist.append(studentName)
-            
+                
             
         return Student.Studentlist
 
-    
+      
 
-
+ 
 
     def calculate(self):
         totalh=0
@@ -75,6 +72,7 @@ class Student:
         totaleavg=0
         self.addHWScore()
         self.addExamScore()
+            
         if len(self.hw_score)>5:
             self.hw_score.remove(min(self.hw_score))
             
@@ -95,8 +93,7 @@ class Student:
         return self.avg
 
    
-    def result(self):
-        return Student.avg
+    
 
 
     
@@ -106,28 +103,22 @@ class Student:
 
 
 class Course(Student):
-    def __init__(self, courceTitle, courceNo):
+    def __init__(self, courceTitle=None, courceNo=None):
         self.hw_score=Student.hw_score
         self.exam_score=Student.exam_score
         self.avg=Student.avg
-        self.__courceTitle=courceTitle
-        self.__courceNo=courceNo
-        self.Enroll=[]
+        Course.courceTitle=[]
+        Course.courceNo=[]
+        self.Enroll={}
         self.Studentlist=Student.Studentlist
         Course.stu={}
         
         
        
     
-    @property
-    def courceTitle(self):
-        return self.__courceTitle
-    @property
-    def courceNo(self):
-        return self.__courceNo
     
-    def studentName(self):
-        return self.__studentName
+    
+    
 
     
     
@@ -137,12 +128,21 @@ class Course(Student):
     def addStudent(self):
         
         for i in self.Studentlist:
-            if i in self.Enroll:
-                print("You Already Enroled in the class")
-            else:
-                self.Enroll.append(i)
-                print("Student: "+str(i)+" added to class", end=" ")
-                print( self.courceTitle)
+            
+                while True:
+                    e=input("Enter Cource Name: ")
+                    if e=='exit':
+                        break
+                    else:
+                        Course.courceTitle.append(e)
+                    
+                self.Enroll[i]=(Course.courceTitle)
+                
+                a=list(self.Enroll.values())
+                for i in a:
+                    self.Enroll=str(i)
+                return self.Enroll
+
 
     def display_Enroll(self):
         self.Enroll.sort()
@@ -153,17 +153,19 @@ class Course(Student):
 
     #def result(self):
     #    return Student.avg
+    
     def studentgetAvarage(self):
-        
+        ls=[]
         for i in self.Studentlist:
-            print("Enter a Score For",i)
-            Course.stu[i]=(self.avg)
+            for j in Course.courceTitle:
+                print("Enter a Marks for %s in %s Subject"%(i,j))
+                Course.stu[i]=[j, self.calculate()]
         print(Course.stu)
         return Course.stu
 
     def grade(self):
         
-        return Course.stu.values()
+        return Student.avg
 
          
         
@@ -173,28 +175,23 @@ class Course(Student):
 class RecordOffice(Course, Student):
     def __init__(self):
         self.Studentlist=Course.Studentlist
+        self.avg=Student.avg
         self.stu=Course.stu
-        RecordOffice.sgrade=[]
+        
         
 
     
-    def grade(self):
-        (RecordOffice.sgrade)=self.stu.values()
-        
-        a=list(RecordOffice.sgrade)
-        for i in a:
-            RecordOffice.sgrade=float(i)
-        
-        return RecordOffice.sgrade
+    
 
     
     def latter(self):
         
-        if RecordOffice.sgrade >= 90: print("A"); return"A"
-        elif RecordOffice.sgrade >= 80: return "B"
-        elif RecordOffice.sgrade >= 70: return "C"
-        elif RecordOffice.sgrade >= 60: return "D"
-        else : return "E"
+         for i in self.Studentlist:
+            if self.avg >= 90: print("%s get Grade A in %s" %(i,Course.courceTitle)) 
+            elif self.avg >= 80: print("%s get Grade B in %s" %(i,Course.courceTitle))
+            elif self.avg >= 70: print("%s get Grade C in %s" %(i,Course.courceTitle))
+            elif self.avg >= 60: print("%s get Grade D in %s" %(i,Course.courceTitle))
+            else : print("%s get Grade E in %s" %(i,Course.courceTitle))
 
 
     
@@ -212,50 +209,20 @@ class RecordOffice(Course, Student):
 
 
 def main():
-    s1=Student("Jenish")
+    s1=Student()
     s1.addstudent()
-    s1.calculate()
-    s=Course("Math",101)
-    #
-   #
-    #s.studentgetAvarage(s1.studentList)
-    #print("")
-    #s.addHWScore(86)
-    #s.addHWScore(64)
-    #s.addHWScore(87)
-    #s.addHWScore(65)
-    #s.addHWScore(78)
-    #s.addHWScore(93)
-#
-    #s.addExamScore(74)
-    #s.addExamScore(95)
-    #s.addExamScore(75)
-    #s.addExamScore(76)
-    #s.addExamScore(83)
-    #s.calculate()
-#
     
+    s=Course()
+
     
+    s.addStudent()
     s.studentgetAvarage()
-    #s.grade()
-    
-    #
-#
-    s=RecordOffice()
     s.grade()
-    #s.latter()
-    
-    
-    
     
 
-
-
-
-
-
-
-
+    s=RecordOffice()
+    
+    s.latter()
 
 main()
 
