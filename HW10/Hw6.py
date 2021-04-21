@@ -5,9 +5,10 @@ import enum
 class Student:
     def __init__(self, studentName):
         self.__studentName=studentName
-        self.hw_score=[]
-        self.exam_score=[]
-        self.avg=()
+        Student.hw_score=[]
+        Student.exam_score=[]
+        Student.avg=()
+        Student.Studentlist=[]
         
         self.score=[] 
 
@@ -50,6 +51,18 @@ class Student:
         return self.exam_score
 
     
+    def addstudent(self):
+        print("Please Enter 'exit' for Exit")
+        while True:
+            studentName=str(input("Enter A Student Name: "))
+            if studentName == 'exit':
+                break
+            
+            else:
+                Student.Studentlist.append(studentName)
+            
+            
+        return Student.Studentlist
 
     
 
@@ -78,12 +91,12 @@ class Student:
 
         self.hw_score.clear()
         self.exam_score.clear()
-
-        
-
+        Student.avg=self.avg
         return self.avg
 
    
+    def result(self):
+        return Student.avg
 
 
     
@@ -94,13 +107,14 @@ class Student:
 
 class Course(Student):
     def __init__(self, courceTitle, courceNo):
-        Student.hw_score=[]
-        Student.exam_score=[]
+        self.hw_score=Student.hw_score
+        self.exam_score=Student.exam_score
+        self.avg=Student.avg
         self.__courceTitle=courceTitle
         self.__courceNo=courceNo
         self.Enroll=[]
-        self.Studentlist=[]
-        self.stu={}
+        self.Studentlist=Student.Studentlist
+        Course.stu={}
         
         
        
@@ -116,20 +130,8 @@ class Course(Student):
         return self.__studentName
 
     
-    def addstudent(self):
-        print("Please Enter 'exit' for Exit")
-        while True:
-            studentName=str(input("Enter A Student Name: "))
-            if studentName == 'exit':
-                break
-            
-            else:
-                self.Studentlist.append(studentName)
-                
-
-                
-        
-        return self.Studentlist
+    
+    
 
     
     def addStudent(self):
@@ -149,34 +151,61 @@ class Course(Student):
         for i in self.Enroll:
             print(i)
 
-    
+    #def result(self):
+    #    return Student.avg
     def studentgetAvarage(self):
         
         for i in self.Studentlist:
             print("Enter a Score For",i)
-            self.stu[i]=(round(self.calculate(), 2))
-        print(self.stu)
-        return self.stu
+            Course.stu[i]=(self.avg)
+        print(Course.stu)
+        return Course.stu
+
+    def grade(self):
+        
+        return Course.stu.values()
+
          
         
         
 
 
-class RecordOffice(Course):
+class RecordOffice(Course, Student):
     def __init__(self):
+        self.Studentlist=Course.Studentlist
         self.stu=Course.stu
+        RecordOffice.sgrade=[]
+        
 
-    
     
     def grade(self):
-        for i in self.stu.values():
-            if  i >= 90: return "A"
-            if  90 > i >= 80: return "B"
-            if  80 > i >= 70: return "C"
-            if  70 > i >= 60: return "D"
-            if  60 > i: return "F"
+        (RecordOffice.sgrade)=self.stu.values()
+        
+        a=list(RecordOffice.sgrade)
+        for i in a:
+            RecordOffice.sgrade=float(i)
+        
+        return RecordOffice.sgrade
+
+    
+    def latter(self):
+        
+        if RecordOffice.sgrade >= 90: print("A"); return"A"
+        elif RecordOffice.sgrade >= 80: return "B"
+        elif RecordOffice.sgrade >= 70: return "C"
+        elif RecordOffice.sgrade >= 60: return "D"
+        else : return "E"
 
 
+    
+
+
+
+    
+    
+
+    
+    
 
     
 
@@ -184,8 +213,8 @@ class RecordOffice(Course):
 
 def main():
     s1=Student("Jenish")
-    
-    
+    s1.addstudent()
+    s1.calculate()
     s=Course("Math",101)
     #
    #
@@ -205,13 +234,16 @@ def main():
     #s.addExamScore(83)
     #s.calculate()
 #
-    s.addstudent()
+    
     
     s.studentgetAvarage()
+    #s.grade()
+    
     #
 #
     s=RecordOffice()
     s.grade()
+    #s.latter()
     
     
     
